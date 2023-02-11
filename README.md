@@ -9,3 +9,5 @@ AtCoder用のライブラリを保管しているリポジトリです.
 |  Algorithm  |  Contents  |
 | ---- | ---- |
 |  [データ構造](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/data_structure)  | データ構造関連のライブラリ   |
+|  [数学処理](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Mathematics)  | 数学処理のライブラリ   |
+
