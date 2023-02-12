@@ -5,7 +5,7 @@ class UnionFind
 {
 public:
     UnionFind() = default;
-    explicit UnionFind(size_t n) : par(n), siz(n, 1)
+    explicit UnionFind(size_t n) : par(n), rank(n, 0), siz(n, 1)
     {
         iota(par.begin(), par.end(), 0);
     }
@@ -21,12 +21,16 @@ public:
         v = root(v);
         if (u != v)
         {
-            if (siz[u] < siz[v])
+            if (rank[u] < rank[v])
             {
                 swap(u, v);
             }
-            siz[u] += siz[v];
             par[v] = u;
+            if (rank[u] == rank[v])
+            {
+                rank[u]++;
+            }
+            siz[u] += siz[v];
         }
     }
     bool issame(int u, int v)
@@ -40,6 +44,7 @@ public:
 
 private:
     vector<int> par;
+    vector<int> rank;
     vector<int> siz;
 };
 
