@@ -2,9 +2,9 @@
 
 |  Algorithm  |  Contents  |計算量|
 | ---- | ----| ----|
-|  [bit全探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/bitSearch/bitSearch.cpp)  |  部分集合を全パターン列挙する  |O($2^N$) |
-|  [順列全探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/permutation/permutation.cpp)  | 集合の順列を全列挙する  |O($N!\times N$) |
-|  [二分探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/binarySearch/binarySearch.cpp)  | 二分探索によりindexを求める  |O($N\log(N)$) |
+|  [bit全探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/bitSearch/bitSearch.cpp)  |  部分集合を全パターン列挙する  |O( $2^N$ ) |
+|  [順列全探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/permutation/permutation.cpp)  | 集合の順列を全列挙する  |O( $N!\times N$ ) |
+|  [二分探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search/binarySearch/binarySearch.cpp)  | 二分探索によりindexを求める  |O( $N\log(N)$ ) |
 
 
 ## Note
@@ -14,9 +14,9 @@ int key;
 std::set<int> st;
 std::binary_search(st.begin(),st.end(),key);
 ```
-としてしまった場合は計算量が O($N$) になってしまう点に注意が必要.
+としてしまった場合は計算量が O( $N$ ) になってしまう点に注意が必要.
 
-計算量をO($\log(N)$)にするためには,
+計算量をO( $\log(N)$ )にするためには,
 ```
 int key;
 std::set<int> st;
