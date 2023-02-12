@@ -4,7 +4,7 @@
 ![](https://img.shields.io/github/directory-file-count/Nishikubo-Masato/AtCoder-Library)
 [![Rating](https://badgen.org/img/atcoder/mn01137/rating/algorithm?style=plastic)](https://atcoder.jp/users/mn01137?contestType=algo)
 
-AtCoder用のライブラリを保管しているリポジトリです.
+AtCoder, Codeforces用のライブラリを保管しているリポジトリです.
 
 |  Algorithm  |  Contents  |
 | ---- | ---- |
