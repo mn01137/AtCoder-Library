@@ -50,8 +50,7 @@ private:
 
 int main()
 {
-    // cout << fixed << setprecision(10);
-    cin.tie(0)->sync_with_stdio(0);
     int n;
+    cin >> n;
     UnionFind uf(n + 1);
 }
