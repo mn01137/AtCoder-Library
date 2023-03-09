@@ -43,9 +43,7 @@ public:
     }
 
 private:
-    vector<int> par;
-    vector<int> rank;
-    vector<int> siz;
+    vector<int> par, rank, siz;
 };
 
 int main()
