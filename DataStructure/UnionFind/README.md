@@ -1,4 +1,4 @@
-UnionFind構造体
+# UnionFind構造体
 ```
 class UnionFind
 {
