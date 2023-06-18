@@ -4,11 +4,13 @@ const int INF = 1e9;
 const ll LINF = 1e18;
 using namespace std;
 
+template <typename T>
 class segment_tree
 {
 private:
     int sz;
-    vector<int> seg, lazy;
+    T val;
+    vector<T> seg, lazy;
     void eval(int k)
     {
         if (k < sz)
@@ -17,9 +19,9 @@ private:
             lazy[k * 2 + 1] = max(lazy[k * 2 + 1], lazy[k]);
         }
         seg[k] = max(seg[k], lazy[k]);
-        lazy[k] = 0;
+        lazy[k] = val;
     }
-    void update(int a, int b, int x, int k, int l, int r)
+    void update(int a, int b, T x, int k, int l, int r)
     {
         eval(k);
         if (a <= l and r <= b)
@@ -34,12 +36,12 @@ private:
             seg[k] = max(seg[k * 2], seg[k * 2 + 1]);
         }
     }
-    int range_max(int a, int b, int k, int l, int r)
+    T range_max(int a, int b, int k, int l, int r)
     {
         eval(k);
         if (r <= a or b <= l)
         {
-            return 0;
+            return val;
         }
         else if (a <= l and r <= b)
         {
@@ -47,8 +49,8 @@ private:
         }
         else
         {
-            int vl = range_max(a, b, k * 2, l, (l + r) / 2);
-            int vr = range_max(a, b, k * 2 + 1, (l + r) / 2, r);
+            T vl = range_max(a, b, k * 2, l, (l + r) / 2);
+            T vr = range_max(a, b, k * 2 + 1, (l + r) / 2, r);
             return max(vl, vr);
         }
     }
@@ -60,14 +62,24 @@ public:
         sz = 1;
         while (sz < n)
             sz *= 2;
-        seg = vector<int>(sz * 2, 0);
-        lazy = vector<int>(sz * 2, 0);
+        val = 0;
+        seg = vector<T>(sz * 2, 0);
+        lazy = vector<T>(sz * 2, 0);
     }
-    void updte(int l, int r, int x)
+    void init(int n, T v)
+    {
+        sz = 1;
+        while (sz < n)
+            sz *= 2;
+        val = v;
+        seg.resize(sz * 2, val);
+        lazy.resize(sz * 2, val);
+    }
+    void update(int l, int r, T x)
     {
         update(l, r, x, 1, 0, sz);
     }
-    int range_max(int l, int r)
+    T range_max(int l, int r)
     {
         return range_max(l, r, 1, 0, sz);
     }
@@ -79,5 +91,5 @@ int main()
     cin.tie(0)->sync_with_stdio(0);
     int n;
     cin >> n;
-    segment_tree seg(n);
+    segment_tree<int> seg(n);
 }
