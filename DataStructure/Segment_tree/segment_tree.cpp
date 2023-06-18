@@ -87,8 +87,6 @@ public:
 
 int main()
 {
-    // cout << fixed << setprecision(10);
-    cin.tie(0)->sync_with_stdio(0);
     int n;
     cin >> n;
     segment_tree<int> seg(n);
