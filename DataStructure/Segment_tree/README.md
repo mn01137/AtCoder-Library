@@ -2,4 +2,4 @@
 
 |  Algorithm  |  Contents  |
 | ---- | ----
-|  [lazy Segment Tree]()  |  遅延評価セグメント木  |
+|  [lazy Segment Tree](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/DataStructure/Segment_tree/lazy)  |  遅延評価セグメント木  |
