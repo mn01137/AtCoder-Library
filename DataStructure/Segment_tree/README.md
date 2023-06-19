@@ -2,4 +2,4 @@
 
 |  Algorithm  |  Contents  |
 | ---- | ----
-|  [lazy Segment Tree](lazy/)  |  遅延評価セグメント木  |
+|  [lazy Segment Tree]()  |  遅延評価セグメント木  |
