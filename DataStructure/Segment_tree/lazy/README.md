@@ -1,5 +1,6 @@
 # 遅延評価セグメント木
 
+## 区間最大
 ```
 class segment_tree
 {
