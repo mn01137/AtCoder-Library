@@ -1,9 +1,7 @@
-#include <bits/stdc++.h>
-typedef long long ll;
-const int INF = 1e9;
-const ll LINF = 1e18;
-using namespace std;
+# 遅延評価セグメント木
 
+## 区間最大
+```
 template <typename T>
 class segment_tree
 {
@@ -84,12 +82,9 @@ public:
         return range_max(l, r, 1, 0, sz);
     }
 };
+```
 
-int main()
-{
-    // cout << fixed << setprecision(10);
-    cin.tie(0)->sync_with_stdio(0);
-    int n;
-    cin >> n;
-    segment_tree<int> seg(n);
-}
+## 参考
+[例題 029-Long Bricks (競プロ典型90問)](https://atcoder.jp/contests/typical90/tasks/typical90_ac)
+
+[アルゴリズムロジック セグメント木を徹底解説！](https://algo-logic.info/segment-tree/)
