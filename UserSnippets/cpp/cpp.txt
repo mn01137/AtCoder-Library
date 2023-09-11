@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
-const int INF = INT_MAX / 2;
-const long long LINF = 1LL << 60;
+const int INF = INT_MAX;
+const long long LINF = 1e18;
 const long long MOD17 = 1000000007;
 const long long MOD99 = 998244353;
 
