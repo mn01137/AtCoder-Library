@@ -1,4 +1,8 @@
 #include <bits/stdc++.h>
+#if __has_include(<atcoder/all>)
+#include <atcoder/all>
+using namespace atcoder;
+#endif
 
 const int INF = INT_MAX;
 const long long LINF = 1e18;
@@ -69,37 +73,34 @@ T euclid_distance2(pair<T, T> a, pair<T, T> b) { return (a.first - b.first) * (a
 
 /*---------------- debug  ---------------------*/
 
-template <class T>
-void print(vector<T> &a)
+#ifdef __LOCAL
+template <typename T>
+void view(T e) { cout << e << endl; }
+template <typename T>
+void view(const std::vector<T> &v)
 {
-    for (auto nx : a)
-        cout << nx << ' ';
+    for (const auto &e : v)
+    {
+        cout << e << " ";
+    }
     cout << endl;
 }
-template <class T>
-void print(vector<vector<T>> &a)
+template <typename T>
+void view(const vector<std::vector<T>> &vv)
 {
-    for (auto nv : a)
+    for (const auto &v : vv)
     {
-        for (auto nx : nv)
-            cout << nx << ' ';
-        cout << endl;
+        view(v);
     }
 }
-template <class T>
-void print(set<T> &a)
-{
-    for (auto nx : a)
-        cout << nx << ' ';
-    cout << endl;
-}
-template <class T>
-void print(multiset<T> &a)
-{
-    for (auto nx : a)
-        cout << nx << ' ';
-    cout << endl;
-}
+#else
+template <typename T>
+void view([[maybe_unused]] T e) {}
+template <typename T>
+void view([[maybe_unused]] const vector<T> &v) {}
+template <typename T>
+void view([[maybe_unused]] const vector<vector<T>> &vv) {}
+#endif
 
 /*---------------- macro -------------------------*/
 
