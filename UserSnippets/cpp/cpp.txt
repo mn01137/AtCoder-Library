@@ -74,6 +74,7 @@ T euclid_distance2(pair<T, T> a, pair<T, T> b) { return (a.first - b.first) * (a
 /*---------------- debug  ---------------------*/
 
 #ifdef __LOCAL
+<<<<<<< HEAD
 void view() { cout << endl; }
 template <class Head, class... Tail>
 void view([[maybe_unused]] Head &&head, [[maybe_unused]] Tail &&...tail)
@@ -84,6 +85,13 @@ void view([[maybe_unused]] Head &&head, [[maybe_unused]] Tail &&...tail)
 template <typename T>
 void view(const std::vector<T> &v)
 {
+=======
+template <typename T>
+void view(T e) { cout << e << endl; }
+template <typename T>
+void view(const std::vector<T> &v)
+{
+>>>>>>> 2830d2571b315e2c8d0b1f7f6dd012a9dddd4f3b
     for (const auto &e : v)
     {
         cout << e << " ";
