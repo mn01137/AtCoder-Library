@@ -45,6 +45,15 @@ void in(vector<T> &a)
     }
 }
 template <class T>
+void in(vector<T> &a, vector<T> &b)
+{
+    assert((int)a.size() == (int)b.size());
+    for (int i = 0; i < (int)a.size(); i++)
+    {
+        cin >> a[i] >> b[i];
+    }
+}
+template <class T>
 void out(T a)
 {
     cout << a << endl;
@@ -158,7 +167,7 @@ void solve2()
 }
 
 void solve()
-{$0
+{
 }
 
 int main()
