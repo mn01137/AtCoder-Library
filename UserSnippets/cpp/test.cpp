@@ -23,6 +23,7 @@ using namespace std;
 /*---------------- typedef  ----------------------*/
 
 typedef long long ll;
+typedef unsigned long long ull;
 typedef vector<int> vii;
 typedef vector<ll> vll;
 typedef vector<string> vs;
@@ -30,7 +31,40 @@ typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
 /*---------------- function  -------------------------*/
-
+template <class T>
+void in(T &a)
+{
+    cin >> a;
+}
+template <class T>
+void in(vector<T> &a)
+{
+    for (auto &&v : a)
+    {
+        cin >> v;
+    }
+}
+template <class T>
+void out(T a)
+{
+    cout << a << endl;
+}
+template <class T>
+void outln(vector<T> &a)
+{
+    for (auto &&v : a)
+    {
+        cout << v << endl;
+    }
+}
+template <class T>
+void out(vector<T> &a)
+{
+    for (int i = 0; i < (int)a.size(); i++)
+    {
+        cout << a[i] << (i == ((int)a.size() - 1) ? "\n" : " ");
+    }
+}
 template <class T>
 bool clamp(T x, T min, T max) { return (x >= min and x <= max); }
 void YesNo(bool ok) { cout << (ok ? "Yes" : "No") << endl; }
@@ -56,15 +90,6 @@ T lcm(T a, T b)
 {
     return a / gcd(a, b) * b;
 }
-/**
- * @brief arithmetic progression sum
- *
- * @tparam T
- * @param n number of terms
- * @param a1 first terms
- * @param d difference
- * @return T
- */
 template <class T>
 T apsum(T n, T a1, T d) { return (n * (2 * a1 + (n - 1) * d)) / 2; }
 double euclid_distance(pair<double, double> a, pair<double, double> b) { return sqrt((a.first - b.first) * (a.first - b.first) + (a.second - b.second) * (a.second - b.second)); }
@@ -74,8 +99,13 @@ T euclid_distance2(pair<T, T> a, pair<T, T> b) { return (a.first - b.first) * (a
 /*---------------- debug  ---------------------*/
 
 #ifdef __LOCAL
-template <typename T>
-void view(T e) { cout << e << endl; }
+void views() { cout << endl; }
+template <class Head, class... Tail>
+void views([[maybe_unused]] Head &&head, [[maybe_unused]] Tail &&...tail)
+{
+    cout << head << " ";
+    views(move(tail)...);
+}
 template <typename T>
 void view(const std::vector<T> &v)
 {
@@ -94,6 +124,8 @@ void view(const vector<std::vector<T>> &vv)
     }
 }
 #else
+template <class Head, class... Tail>
+void view([[maybe_unused]] Head &&head, [[maybe_unused]] Tail &&...tail) {}
 template <typename T>
 void view([[maybe_unused]] T e) {}
 template <typename T>
