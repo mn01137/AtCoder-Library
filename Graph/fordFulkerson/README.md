@@ -61,7 +61,6 @@ public:
         return 0;
     }
 
-    // 頂点sから頂点tまでの最大フローの総流量を返す
     int maxFlow(int s, int t)
     {
         int totalFlow = 0;
