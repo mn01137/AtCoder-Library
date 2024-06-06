@@ -30,7 +30,7 @@ $$ \sum_{p<\sqrt{N}} \frac{N}{p} = \frac{N}{2} + \frac{N}{3} + \frac{N}{5} + \do
 
 調和級数の発散スピードは $\log N$ であり，素数の逆数の和の発散スピードは $\log \log N$ である．
 
-そのため，計算量は，$ O(N \log \log N) $ となる．
+そのため，計算量は， $O(N \log \log N)$ となる．
 
 ## 参考
 - [アルゴ式 エラトステネスのふるいとは](https://algo-method.com/descriptions/64)
