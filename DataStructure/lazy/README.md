@@ -1,90 +1,72 @@
 # 遅延評価セグメント木
 
-## 区間最大
-```
-template <typename T>
-class segment_tree
-{
-private:
-    int sz;
-    T val;
-    vector<T> seg, lazy;
-    void eval(int k)
-    {
-        if (k < sz)
-        {
-            lazy[k * 2] = max(lazy[k * 2], lazy[k]);
-            lazy[k * 2 + 1] = max(lazy[k * 2 + 1], lazy[k]);
-        }
-        seg[k] = max(seg[k], lazy[k]);
-        lazy[k] = val;
-    }
-    void update(int a, int b, T x, int k, int l, int r)
-    {
-        eval(k);
-        if (a <= l and r <= b)
-        {
-            lazy[k] = x;
-            eval(k);
-        }
-        else if (a < r and l < b)
-        {
-            update(a, b, x, k * 2, l, (l + r) / 2);     // left child
-            update(a, b, x, k * 2 + 1, (l + r) / 2, r); // right child
-            seg[k] = max(seg[k * 2], seg[k * 2 + 1]);
-        }
-    }
-    T range_max(int a, int b, int k, int l, int r)
-    {
-        eval(k);
-        if (r <= a or b <= l)
-        {
-            return val;
-        }
-        else if (a <= l and r <= b)
-        {
-            return seg[k];
-        }
-        else
-        {
-            T vl = range_max(a, b, k * 2, l, (l + r) / 2);
-            T vr = range_max(a, b, k * 2 + 1, (l + r) / 2, r);
-            return max(vl, vr);
-        }
-    }
+以下はACL(AtCoder Libarary)による実装を載せています．
 
-public:
-    segment_tree() : sz(0), seg(), lazy(){};
-    segment_tree(int n)
-    {
-        sz = 1;
-        while (sz < n)
-            sz *= 2;
-        val = 0;
-        seg = vector<T>(sz * 2, 0);
-        lazy = vector<T>(sz * 2, 0);
-    }
-    void init(int n, T v)
-    {
-        sz = 1;
-        while (sz < n)
-            sz *= 2;
-        val = v;
-        seg.resize(sz * 2, val);
-        lazy.resize(sz * 2, val);
-    }
-    void update(int l, int r, T x)
-    {
-        update(l, r, x, 1, 0, sz);
-    }
-    T range_max(int l, int r)
-    {
-        return range_max(l, r, 1, 0, sz);
-    }
+## コンストラクタ
+
+```
+lazy_segtree<S, op, e, F, mapping, composition, id> seg(n);
+```
+```
+vector<T> a(n);
+lazy_segtree<S, op, e, F, mapping, composition, id> seg(a);
+```
+
+- モノイドの型：```S```
+- ： $S \times S \rightarrow S$ を計算する関数 ```S op(S a, S b)```]
+- 単位元を返す：```S e()```
+- 写像の型：```F```
+- $f(x)$ を返す関数：```S mapping(F f,F g)```
+- $f \circ g$ を返す関数：```F composition```
+- $id$ を返す関数：```F id()```
+
+## 遅延伝搬
+
+### 区間加算・区間最小値取得
+```
+using S = long long;
+using F = long long;
+
+const S INFNITY = 8e18;
+
+S op(S a, S b){ return min(a, b); }
+S e(){ return INFNITY; }
+S mapping(F f, S x){ return f+x; }
+F composition(F f, F g){ return f+g; }
+F id(){ return 0; }
+```
+
+### 区間変更・区間最大値取得
+```
+using S = long long;
+using F = long long;
+
+const S INFNITY = 8e18;
+const F ID = 8e18;
+
+S op(S a, S b){ return max(a, b); }
+S e(){ return -INFNITY; }
+S mapping(F f, S x){ return (f == ID ? x : f); }
+F composition(F f, F g){ return (f == ID ? g : f); }
+F id(){ return ID; }
+```
+
+### 区間変更・区間和取得
+```
+struct S{
+    long long val;
+    int size;
 };
+using F = long long;
+
+const F ID = 8e18;
+
+S op(S a, S b){ return {a.val + b.val, a.size+b.size}; }
+S e(){ return {0, 0}; }
+S mapping(F f, S x){ return (f != ID ? S{f*(long long)x.size, x.size} : x); }
+F composition(F f, F g){ return (f == ID ? g : f); }
+F id(){ return ID; }
 ```
 
 ## 参考
-[例題 029-Long Bricks (競プロ典型90問)](https://atcoder.jp/contests/typical90/tasks/typical90_ac)
-
-[アルゴリズムロジック セグメント木を徹底解説！](https://algo-logic.info/segment-tree/)
+- [AtCoder LibraryのLazy Segtreeのチートシート - ARMERIA](https://betrue12.hateblo.jp/entry/2020/09/23/005940)
