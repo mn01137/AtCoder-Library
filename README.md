@@ -9,6 +9,7 @@ AtCoder, Codeforces用のライブラリを保管しているリポジトリで�
 |  Algorithm  |  Contents  |
 | ---- | ---- |
 |  [アルゴリズム](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Algorithm)  | アルゴリズム全般のライブラリ   |
+|  [文字列操作](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/String)  | 文字列操作全般のライブラリ   |
 |  [データ構造](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/DataStructure)  | データ構造関連のライブラリ   |
 |  [数学処理](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Mathematics)  | 数学処理のライブラリ   |
 |  [探索](https://github.com/Nishikubo-Masato/AtCoder-Library/tree/main/Search)  | 探索処理のライブラリ   |
