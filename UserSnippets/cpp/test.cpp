@@ -20,7 +20,7 @@ using namespace std;
 　 ＼ヽ-＿_＿--＿__ヽ
 */
 
-/*---------------- typedef  ----------------------*/
+/*---------------- typedef ----------------------*/
 
 typedef long long ll;
 typedef unsigned long long ull;
@@ -30,50 +30,7 @@ typedef vector<string> vs;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
-/*---------------- function  -------------------------*/
-template <class T>
-void in(T &a)
-{
-    cin >> a;
-}
-template <class T>
-void in(vector<T> &a)
-{
-    for (auto &&v : a)
-    {
-        cin >> v;
-    }
-}
-template <class T>
-void in(vector<T> &a, vector<T> &b)
-{
-    assert((int)a.size() == (int)b.size());
-    for (int i = 0; i < (int)a.size(); i++)
-    {
-        cin >> a[i] >> b[i];
-    }
-}
-template <class T>
-void out(T a)
-{
-    cout << a << endl;
-}
-template <class T>
-void outln(vector<T> &a)
-{
-    for (auto &&v : a)
-    {
-        cout << v << endl;
-    }
-}
-template <class T>
-void out(vector<T> &a)
-{
-    for (int i = 0; i < (int)a.size(); i++)
-    {
-        cout << a[i] << (i == ((int)a.size() - 1) ? "\n" : " ");
-    }
-}
+/*---------------- function ----------------------*/
 template <class T>
 bool clamp(T x, T min, T max) { return (x >= min and x <= max); }
 void YesNo(bool ok) { cout << (ok ? "Yes" : "No") << endl; }
@@ -101,11 +58,60 @@ T lcm(T a, T b)
 }
 template <class T>
 T apsum(T n, T a1, T d) { return (n * (2 * a1 + (n - 1) * d)) / 2; }
-double euclid_distance(pair<double, double> a, pair<double, double> b) { return sqrt((a.first - b.first) * (a.first - b.first) + (a.second - b.second) * (a.second - b.second)); }
-template <class T>
-T euclid_distance2(pair<T, T> a, pair<T, T> b) { return (a.first - b.first) * (a.first - b.first) + (a.second - b.second) * (a.second - b.second); }
 
-/*---------------- debug  ---------------------*/
+/*-------------- input stream ------------------*/
+#ifdef __LOCAL
+static istream *inputStream = &cin;
+void inputTestCaseInLocal(string path)
+{
+    size_t pos = path.find_last_of("\\/");
+    string fileName = (pos == string::npos ? path : path.substr(pos + 1));
+    pos = fileName.find_last_of(".");
+    if (pos != string::npos)
+        fileName = fileName.substr(0, pos);
+    static ifstream file("input/" + fileName + ".txt");
+    if (file and file.peek() != ifstream::traits_type::eof())
+        inputStream = &file;
+}
+void INPUT() {}
+template <typename Head, typename... Tail>
+void INPUT(Head &&head, Tail &&...tail)
+{
+    (*inputStream) >> head;
+    INPUT(forward<Tail>(tail)...);
+}
+template <typename T, typename... Vectors>
+void INPUT(std::vector<T> &first, std::vector<Vectors> &...rest)
+{
+    size_t size = first.size();
+    for (size_t i = 0; i < size; ++i)
+    {
+        (*inputStream) >> first[i];
+        (void)std::initializer_list<int>{((*inputStream) >> rest[i], 0)...};
+    }
+}
+#else
+void inputTestCaseInLocal([[maybe_unused]] string path) {}
+void INPUT() {}
+template <typename Head, typename... Tail>
+void INPUT([[maybe_unused]] Head &&head, [[maybe_unused]] Tail &&...tail)
+{
+    cin >> head;
+    INPUT(forward<Tail>(tail)...);
+}
+template <typename T, typename... Vectors>
+void INPUT([[maybe_unused]] vector<T> &first, [[maybe_unused]] vector<Vectors> &...rest)
+{
+    size_t size = first.size();
+    for (size_t i = 0; i < size; ++i)
+    {
+        cin >> first[i];
+        (void)std::initializer_list<int>{(cin >> rest[i], 0)...};
+    }
+}
+#endif
+
+/*---------------- debug ---------------------*/
 
 #ifdef __LOCAL
 void views() { cout << endl; }
@@ -170,10 +176,11 @@ void solve()
 {
 }
 
-int main()
+int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
     // cout << fixed << setprecision(10);
     cin.tie(0)->sync_with_stdio(0);
+    inputTestCaseInLocal(argv[0]);
     int t = 1;
     while (t--)
     {
