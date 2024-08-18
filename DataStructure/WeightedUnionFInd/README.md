@@ -6,10 +6,10 @@
 
 ```
 template <typename T>
-class UnionFind
+class WeightedUnionFind
 {
 public:
-    UnionFind(int n)
+    WeightedUnionFind(int n)
     {
         N = n;
         par.resize(n);
@@ -78,7 +78,7 @@ private:
 
 ## 出題
 - [ABC 328 F - Good Set Query](https://atcoder.jp/contests/abc328/tasks/abc328_f)
-    - [AC 提出コード](https://atcoder.jp/contests/abc328/submissions/56857824)
+    - [AC 提出コード](https://atcoder.jp/contests/abc328/submissions/56858274)
 
 ## 参考文献
 - [重み付き Union-Find とそれが使える問題のまとめ、および、牛ゲーについて](https://qiita.com/drken/items/cce6fc5c579051e64fab)
