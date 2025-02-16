@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-typedef long long ll;
-const int INF = 1e9;
-const ll LINF = 1e18;
 using namespace std;
 
 int LIS(const vector<long long> &A)

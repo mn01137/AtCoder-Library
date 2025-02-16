@@ -1,38 +1,12 @@
-# LIS(最長部分増加列)
-最長部分増加列をin-place DPで $O(N \log N)$ で実装するライブラリ．
+#include <bits/stdc++.h>
+typedef long long ll;
+const int INF = 1e9;
+const ll LINF = 1e18;
+using namespace std;
 
-|  Algorithm  |  Contents  |
-| ---- | ----|
-|  [二分探索 ver.]()  |  二分探索によるLISを構築  |
-|  [セグメント木 ver.]()  |  セグメント木によるLISを構築  |
+vector<array<long long, 3>> queries;
+vector<long long> answer;
 
-## コピペ用
-
-### 二分探索 ver.
-```c++
-int LIS(const vector<long long> &A)
-{
-    int N = (int)A.size();
-    long long LIS_INF = 1LL << 60;
-    vector<long long> dp(N, LIS_INF);
-    for (int i = 0; i < N; i++)
-    {
-        // dp[k] >= A[i]となる最小のイテレータ
-        auto itr = lower_bound(dp.begin(), dp.end(), A[i]);
-
-        // そこをA[i]でおきかえる
-        // dp[k] : 最長部分増加列の長さがkのときの，i番目まで見た場合の一番後ろの数
-        *itr = A[i];
-    }
-
-    // dp[k] < INFとなる最大のkに対して，長さk+1がLISの答え
-    // 問題に合わせて調整する．
-    return lower_bound(dp.begin(), dp.end(), LIS_INF) - dp.begin();
-}
-```
-
-### セグメント木 ver.
-```c++
 template <class Monoid>
 struct Segment_Tree
 {
@@ -185,6 +159,7 @@ int LIS(const vector<long long> &A)
                          { return max(a, b); }, 0);
 
     int LIS_answer = 0;
+    int query_cnt = 0;
     for (int i = 0; i < N; i++)
     {
         // A[i]が何番目か
@@ -201,33 +176,64 @@ int LIS(const vector<long long> &A)
             dp.set(h, a + 1);
             LIS_answer = max(LIS_answer, a + 1);
         }
+        // ABC393 F
+        // 置き換えた後，iの長さがクエリのRと一致している場合，dp[k] <=　Xとなる最大のkを
+        // segment treeで求めに行く
+        while (query_cnt < (int)queries.size())
+        {
+            long long R = queries[query_cnt][0];
+            long long X = queries[query_cnt][1];
+            long long index_num = queries[query_cnt][2];
+
+            // iがRと一致しているか？
+            if (R - 1 == i)
+            {
+                // dp[k] <= X となる最大のkを求める
+                // Xは何番目に位置しているかを座標から二分探索
+                int x = upper_bound(aval.begin(), aval.end(), X) - aval.begin();
+                x++; // 1-indexed
+                int k = dp.prod(0, x);
+                answer[index_num] = k;
+                query_cnt++;
+            }
+            else
+            {
+                // していない場合は次回以降．
+                break;
+            }
+        }
     }
 
     return LIS_answer;
 }
-```
 
+int main()
+{
+    int N, Q;
+    cin >> N >> Q;
+    vector<long long> A(N);
+    for (int i = 0; i < N; i++)
+    {
+        cin >> A[i];
+    }
 
-## 考え方
-- dp[i][j] = 最初の $ i $ 項のみを考えた場合の単調な部分列において，最後の要素が$ A_j $ であるような場合についての，最長の長さ．
+    queries.resize(Q);
+    answer.resize(Q);
+    for (int i = 0; i < Q; i++)
+    {
+        long long R, X;
+        cin >> R >> X;
+        queries[i] = {R, X, i};
+    }
 
-とする．
-この場合， $ i $ から $ i+1 $ への更新は以下のようになる．
+    // Rが小さい順にクエリを並び替え
+    sort(queries.begin(), queries.end(), [&](auto a, auto b)
+         { return a[0] < b[0]; });
 
-- chmax(dp[i+1][j], dp[i][j]) ( $ A_i $ を選ばない場合)
-- chmax(dp[i+1][j], dp[i][j] + 1) ( $ A_i $ を選ぶ場合，ただし $ A_i > A_j $)
+    LIS(A);
 
-ここで， $ A_i $ の一箇所だけ更新が発生し，それ以外の要素は全く同じになることがわかる．
-そのため，in-place化によって，更新するべき所のみを二分探索 or 平衡二分木によって探索することで計算量を落とすという考え方．
-
-具体的には，dp[i][k] $ \geq a_i $ となる最小のkを二分探索によって求める．
-
-セグメント木の場合でも考え方は同じだが，dp[i][A[j]]としたときに，A[j] $ \leq 10^9 $ の場合にメモリが足りないため，座標圧縮によって実現する．
-
-## 提出例
-- ABC393 F
-    - [二分探索 ver.](https://atcoder.jp/contests/abc393/submissions/62848409)
-    - [セグメント木　ver.](https://atcoder.jp/contests/abc393/submissions/62849419)
-
-## 参考サイト
-- [LIS でも大活躍！ DP の配列使いまわしテクニックを特集](https://qiita.com/drken/items/68b8503ad4ffb469624c#3-lis-%E3%81%AE%E8%A7%A3%E6%B3%951-%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2-ver)
+    for (int i = 0; i < Q; i++)
+    {
+        cout << answer[i] << "\n";
+    }
+}
